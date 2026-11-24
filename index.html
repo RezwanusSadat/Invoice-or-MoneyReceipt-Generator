@@ -3,14 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Invoice & Money Receipt Generator</title>
+<title>Benchmark Solutions | Invoice &amp; Money Receipt</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--desk:#e4ebe6;--panel:#fbfdfb;--ink:#15302a;--mut:#5d756c;--line:#c8d6cf;--acc:#6b2a2a;--grn:#3f8f4a;--fld:#fff;
+:root{--desk:#e4ebe6;--panel:#fbfdfb;--ink:#15302a;--mut:#5d756c;--line:#c8d6cf;--acc:#1b6fb8;--grn:#2f9e5b;--fld:#fff;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#0f1d19;--panel:#17282376;--ink:#e6f0ea;--mut:#92aaa0;--line:#2c443b;--acc:#e08a8a;--grn:#6fcf7b;--fld:#0f1d19}}
-:root[data-theme="dark"]{--desk:#0f1d19;--panel:#172823;--ink:#e6f0ea;--mut:#92aaa0;--line:#2c443b;--acc:#e08a8a;--grn:#6fcf7b;--fld:#0f1d19}
+:root[data-theme="dark"]{--desk:#0f1d19;--panel:#172823;--ink:#e6f0ea;--mut:#92aaa0;--line:#2c443b;--acc:#7cc0ff;--grn:#6fcf7b;--fld:#0f1d19}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--desk);color:var(--ink);font-family:'Hind Siliguri','Segoe UI',sans-serif;font-size:15px}
@@ -33,10 +32,9 @@ input:focus,select:focus,button:focus-visible,summary:focus-visible{outline:2px 
 .calc b{color:var(--ink)}
 details{margin-top:16px;border-top:1px dashed var(--line);padding-top:10px}
 summary{cursor:pointer;font-weight:600;color:var(--acc)}
-.btns{display:grid;gap:10px;margin-top:18px}
-button.go,button.dl{border:0;border-radius:11px;padding:13px;font:600 16px 'Hind Siliguri',sans-serif;cursor:pointer}
-button.go{background:var(--acc);color:#fff}
-:root[data-theme="dark"] button.go{color:#15302a}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.msg{grid-column:1/-1}
+button.go,button.dl,button.pr{border:0;border-radius:11px;padding:13px;font:600 16px 'Hind Siliguri',sans-serif;cursor:pointer}
+button.go{background:linear-gradient(135deg,#1f6fd1,#2f9e5b);color:#fff;transition:transform .2s,filter .2s}button.go:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.08)}button.pr{background:transparent;color:var(--acc);border:2px solid var(--acc);transition:transform .2s,background .2s}button.pr:hover{transform:translateY(-2px);background:var(--desk)}
 button.dl{background:var(--grn);color:#08230f;word-break:break-all}
 button:disabled{opacity:.55;cursor:wait}
 .msg{min-height:20px;font-size:13.5px;color:var(--acc)}
@@ -99,12 +97,159 @@ button:disabled{opacity:.55;cursor:wait}
 .pay .how>div>div:last-child{flex:1}
 .rsig{align-self:flex-start;margin:16px 0 26px;font-size:14px}
 .rsig hr{border:0;border-top:2px solid #000;width:270px;margin:60px 0 12px}
+
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.top .lnk{background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px 10px;cursor:pointer}
+.mini{height:40px;width:auto;display:block}
+body.home .app,body.home .sky,body.home .chip{display:none}body:not(.home) .home{display:none}
+.app{position:relative;z-index:1}
+.home{position:relative;min-height:100vh;overflow-x:clip;color:#fff;background:radial-gradient(120% 90% at 50% 0%,#0d4a63 0%,#082638 45%,#04121c 100%)}
+#fx{position:absolute;inset:0;width:100%;height:100%}
+.hwrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:max(28px,env(safe-area-inset-top)) 20px max(28px,env(safe-area-inset-bottom))}
+.hwrap>*{animation:up .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes up{from{opacity:0;transform:translateY(26px)}}
+.orb{position:relative;margin-bottom:6px}
+.lcard{position:relative;padding:3px;border-radius:24px;overflow:hidden;box-shadow:0 0 50px rgba(47,158,91,.35)}
+.lcard::before{content:"";position:absolute;inset:-80%;background:conic-gradient(#3aa845,#2e7fe8,#d9322e,#3aa845);animation:spin 5s linear infinite}
+.lcard .in{position:relative;background:#fff;border-radius:21px;padding:16px 28px}
+.lcard img{height:76px;width:auto;display:block}
+@keyframes spin{to{transform:rotate(1turn)}}
+.ring{position:absolute;inset:0;border-radius:26px;border:2px solid rgba(111,207,123,.55);animation:ping 3.2s ease-out infinite}
+.ring+.ring{animation-delay:1.6s;border-color:rgba(124,192,255,.55)}
+@keyframes ping{to{transform:scale(1.55,1.9);opacity:0}}
+.kick{margin:0;letter-spacing:.28em;text-transform:uppercase;font-size:12.5px;color:#9fd6e6}
+.ht{font:700 clamp(30px,6.4vw,56px)/1.1 'Bricolage Grotesque','Hind Siliguri',sans-serif;margin:0;background:linear-gradient(90deg,#fff 10%,#a5efb9 50%,#8ec5ff 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hs{margin:0;max-width:520px;color:#c4dde6;font-size:16px}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:640px}
+.pills span{font-size:13px;padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);animation:glow 6s ease-in-out infinite}
+@keyframes glow{0%,12%,100%{border-color:rgba(255,255,255,.22);box-shadow:none}6%{border-color:#6fcf7b;box-shadow:0 0 16px rgba(111,207,123,.55)}}
+.choose{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(620px,100%);margin-top:8px}
+@media(max-width:560px){.choose{grid-template-columns:1fr}}
+.card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);color:#fff;font:inherit;cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s}
+.card:hover,.card:focus-visible{transform:translateY(-5px);border-color:#6fcf7b;box-shadow:0 14px 34px rgba(47,158,91,.35)}
+.card svg{width:44px;height:44px;stroke:#8fe3a4;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.card b{font:700 19px 'Bricolage Grotesque','Hind Siliguri',sans-serif}.card small{color:#b5d0da;font-size:13px}
+.site{color:#8ec5ff;text-decoration:none;font-weight:600;letter-spacing:.04em}.site:hover{text-decoration:underline}
+@media(prefers-reduced-motion:reduce){.lcard::before,.ring{animation:none}}
+/* generator page: light tinted theme, logo lockup, translucent panels over the skyline */
+body:not(.home){background:radial-gradient(rgba(11,74,111,.08) 1px,transparent 1.5px) 0 0/26px 26px,linear-gradient(160deg,#dcebe4,#cfe3e8 55%,#c2d9e6) fixed}
+.panel{background:rgba(251,253,251,.84);backdrop-filter:blur(6px)}
+.ah{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.ab{display:block;transition:transform .3s}.ab:hover{transform:scale(1.04)}
+.ab img{height:64px;width:auto;display:block;mix-blend-mode:multiply}
+.av{display:none}.at{flex-basis:100%;order:3;padding-left:12px;border-left:3px solid #2f9e5b}
+.ak{margin:0 0 4px;letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-weight:600;color:var(--mut)}
+.at h1{margin:0;background:linear-gradient(90deg,#0b3b5c,#1f6fd1 60%,#2f9e5b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hb{margin-left:auto}
+.sky{position:fixed;left:0;bottom:0;width:100%;height:46vh;z-index:0;pointer-events:none}
+.ln{fill:none;stroke:#0b5d86;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ln.fl{fill:rgba(11,93,134,.12)}
+.flow{fill:none;stroke:#2f9e5b;stroke-width:3.5;stroke-linecap:round;stroke-dasharray:3 24;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-27}}
+.rot{animation:rot 8s linear infinite}.rot.s{animation-duration:5s}.rot.r{animation-direction:reverse}
+@keyframes rot{to{transform:rotate(1turn)}}
+.pf{fill:rgba(11,93,134,.28);transform-box:fill-box;transform-origin:center;animation:puff 5s ease-out infinite}
+@keyframes puff{from{transform:translate(0,0) scale(.5);opacity:.9}to{transform:translate(20px,-95px) scale(2.3);opacity:0}}
+.win{fill:#e8b923;animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.2}}
+.nd{animation:sw 3.4s ease-in-out infinite alternate}
+@keyframes sw{from{transform:rotate(-55deg)}to{transform:rotate(55deg)}}
+.sun{fill:#f5c542;fill-opacity:.8;transform-origin:930px 80px;animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.3);fill-opacity:.45}}
+.chip{position:fixed;bottom:10vh;z-index:0;font:600 13px 'Bricolage Grotesque',sans-serif;color:#0b5d86;background:rgba(255,255,255,.65);border:1px solid rgba(11,93,134,.25);padding:4px 12px;border-radius:99px;opacity:0;pointer-events:none;animation:rise 12s ease-in infinite}
+@keyframes rise{0%{opacity:0;transform:translateY(0)}15%{opacity:.9}80%{opacity:.6}100%{opacity:0;transform:translateY(-36vh)}}
+@media(max-width:700px){.chip{display:none}}
+@media(prefers-reduced-motion:reduce){.hwrap>*,.pills span,.flow,.rot,.pf,.win,.nd,.sun,.chip{animation:none}}
+.hb{border:1px solid var(--line);background:none;color:var(--acc);font:600 14px 'Hind Siliguri',sans-serif;padding:8px 14px;border-radius:10px;cursor:pointer}
+.top .lnk{display:block}
+#printHost{display:none}
+@media print{@page{size:A4;margin:0}html,body{background:#fff!important;margin:0}body>*:not(#printHost){display:none!important}#printHost{display:block}#printHost .paper{width:210mm;height:296.5mm;box-shadow:none}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ===== generator page: deep teal theme matching the splash ===== */
+body:not(.home){--desk:rgba(255,255,255,.07);--ink:#e9f4f8;--mut:#9cc2d0;--line:rgba(255,255,255,.2);--acc:#6cc4ff;--grn:#4fd07f;--fld:rgba(3,16,26,.55);color-scheme:dark;
+ background:radial-gradient(90% 55% at 15% 0%,rgba(47,158,91,.28),transparent 60%),radial-gradient(80% 60% at 95% 10%,rgba(46,127,232,.30),transparent 60%),linear-gradient(170deg,#0b3a52 0%,#07263a 45%,#04121c 100%) fixed}
+.panel{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);box-shadow:0 24px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.panel::before{content:"";position:absolute;left:18px;right:18px;top:0;height:3px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,#3aa845,#2e7fe8,#d9322e)}
+.ab{background:#fff;border-radius:14px;padding:7px 14px;box-shadow:0 0 30px rgba(47,158,91,.35)}
+.ab img{mix-blend-mode:normal;height:52px}
+.at h1{background:linear-gradient(90deg,#fff 5%,#a5efb9 55%,#8ec5ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ak{color:#9fd6e6}.sub{color:#b9d6e0}
+.seg{background:rgba(0,0,0,.30);border-color:rgba(255,255,255,.16)}
+.seg i{background:linear-gradient(135deg,#1f6fd1,#2f9e5b);box-shadow:0 4px 14px rgba(31,111,209,.45)}
+.seg button{color:#cfe3ea}.seg button.on{color:#fff}
+input,select,textarea{background:var(--fld);border-color:rgba(255,255,255,.2);color:#f1fafc}
+input:focus,select:focus,textarea:focus{border-color:#6cc4ff;box-shadow:0 0 0 3px rgba(108,196,255,.18);outline:none}
+::placeholder{color:#6f95a5;opacity:1}
+select option{background:#0a2a3d;color:#fff}
+.calc{border:1px solid rgba(255,255,255,.12)}
+.hb{border-color:rgba(255,255,255,.28);color:#d8eef7;background:rgba(255,255,255,.06);transition:background .2s,transform .2s}.hb:hover{background:rgba(255,255,255,.14);transform:translateX(-2px)}
+.stage{box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.1),0 0 60px rgba(46,127,232,.18)}
+.tag{color:#fff}
+.sky .ln{stroke:#5cc0ee;stroke-opacity:.75}.sky .ln.fl{fill:rgba(92,192,238,.10)}.sky circle[stroke]{stroke:#5cc0ee}
+.pf{fill:rgba(170,225,255,.30)}
+.chip{color:#bfe6f5;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+
+@media(max-width:560px){.hwrap{padding-bottom:max(120px,env(safe-area-inset-bottom))}}
+/* splash: logo link + drifting clouds */
+.clouds.gc{position:fixed;height:46vh}body.home .clouds.gc{display:none}
+.lk{display:block;border-radius:24px;transition:transform .3s}.lk:hover,.lk:focus-visible{transform:scale(1.05)}
+.clouds{position:absolute;left:0;right:0;top:0;height:46%;overflow:hidden;pointer-events:none;z-index:0}
+.cl{position:absolute;left:0;height:auto;aspect-ratio:200/80;color:#cfeaff;opacity:var(--o);filter:blur(1.2px);animation:drift var(--d) linear infinite;animation-delay:var(--dl);will-change:transform}
+@keyframes drift{from{transform:translateX(-340px)}to{transform:translateX(calc(100vw + 340px))}}
+@media(prefers-reduced-motion:reduce){.cl{animation:none;transform:translateX(12vw)}}
 </style>
 </head>
-<body>
+<body class="home">
+<main class="home" id="home">
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="clouds" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><symbol id="cloud" viewBox="0 0 200 80"><g fill="currentColor"><circle cx="55" cy="50" r="24"/><circle cx="92" cy="36" r="30"/><circle cx="132" cy="47" r="26"/><circle cx="163" cy="56" r="17"/><rect x="38" y="52" width="140" height="24" rx="12"/></g></symbol></svg>
+<svg class="cl" style="top:5%;width:300px;--d:95s;--dl:-10s;--o:.16"><use href="#cloud"/></svg>
+<svg class="cl" style="top:14%;width:190px;--d:70s;--dl:-48s;--o:.12"><use href="#cloud"/></svg>
+<svg class="cl" style="top:23%;width:340px;--d:120s;--dl:-80s;--o:.10"><use href="#cloud"/></svg>
+<svg class="cl" style="top:9%;width:150px;--d:58s;--dl:-30s;--o:.18"><use href="#cloud"/></svg>
+<svg class="cl" style="top:31%;width:230px;--d:105s;--dl:-60s;--o:.08"><use href="#cloud"/></svg>
+<svg class="cl" style="top:2%;width:220px;--d:84s;--dl:-70s;--o:.11"><use href="#cloud"/></svg></div>
+<div class="hwrap">
+ <div class="orb"><i class="ring"></i><i class="ring"></i><a class="lk" href="https://www.ben-sol.net" target="_blank" rel="noopener" aria-label="Visit Benchmark Solutions website"><div class="lcard"><div class="in"><img data-logo alt="Benchmark Solutions"></div></div></a></div>
+ <p class="kick">Energy &middot; Environment &middot; Safety &middot; Assurance</p>
+ <h1 class="ht">Invoice &amp; Money Receipt</h1>
+ <p class="hs">Fill in only the variable details. Your branded A4 document is ready to download or print in seconds.</p>
+ <div class="choose">
+  <button class="card" data-go="invoice"><svg viewBox="0 0 48 48"><path d="M12 5h18l8 8v30H12z"/><path d="M30 5v8h8M18 22h14M18 29h14M18 36h8"/></svg><b>Create Invoice</b><small>Auto VAT and amount in words</small></button>
+  <button class="card" data-go="receipt"><svg viewBox="0 0 48 48"><path d="M10 5h28v38l-5-3-5 3-4-3-4 3-5-3-5 3z"/><path d="M17 17h14M17 24h14M17 31l3 3 7-7"/></svg><b>Create Money Receipt</b><small>Cash or cheque, ready to sign</small></button>
+ </div>
+ <a class="site" href="https://www.ben-sol.net" target="_blank" rel="noopener">www.ben-sol.net</a>
+</div></main>
+<svg class="sky" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<defs><g id="py" class="ln"><path d="M0 300L10 150L20 300M2 250H18M5 200H15M-15 165H35M-5 150H25"/></g></defs>
+<path class="ln" d="M0 300H1200"/>
+<path class="ln fl" d="M40 300V220L90 190V220L140 190V220L190 190V220L240 190V220L290 190V300Z"/>
+<rect class="ln fl" x="305" y="125" width="22" height="175"/>
+<rect class="win" x="60" y="250" width="18" height="14"/><rect class="win" x="110" y="250" width="18" height="14" style="animation-delay:.6s"/><rect class="win" x="160" y="250" width="18" height="14" style="animation-delay:1.2s"/><rect class="win" x="210" y="250" width="18" height="14" style="animation-delay:1.8s"/><rect class="win" x="260" y="250" width="18" height="14" style="animation-delay:2.4s"/>
+<circle class="pf" cx="316" cy="118" r="10"/><circle class="pf" cx="316" cy="118" r="10" style="animation-delay:1.7s"/><circle class="pf" cx="316" cy="118" r="10" style="animation-delay:3.4s"/>
+<circle class="ln fl" cx="175" cy="105" r="30"/><path class="ln" d="M150 118A30 30 0 0 1 200 118" /><path class="ln nd" d="M175 105V82" style="transform-origin:175px 105px"/>
+<use href="#py" x="410"/><use href="#py" x="735"/><use href="#py" x="1060"/>
+<path class="ln" d="M445 165Q590 215 720 165M770 165Q915 215 1045 165"/><path class="flow" d="M445 165Q590 215 720 165M770 165Q915 215 1045 165"/>
+<path class="ln" d="M327 150Q360 180 395 165"/><path class="flow" d="M327 150Q360 180 395 165"/>
+<path class="ln" d="M560 300V170M650 300V200"/>
+<g class="rot ln" style="transform-origin:560px 170px"><path d="M560 170V105M560 170L616 202M560 170L504 202"/></g>
+<g class="rot s ln" style="transform-origin:650px 200px"><path d="M650 200V155M650 200L689 222M650 200L611 222"/></g>
+<circle class="sun" cx="930" cy="80" r="22"/>
+<path class="ln fl" d="M800 295L845 265H905L860 295ZM895 295L940 265H1000L955 295Z"/>
+<g class="rot s r" style="transform-origin:1150px 245px"><circle cx="1150" cy="245" r="34" fill="none" stroke="#0b5d86" stroke-width="9" stroke-dasharray="8.9 8.9"/><circle class="ln" cx="1150" cy="245" r="27"/><circle class="ln" cx="1150" cy="245" r="8"/></g>
+</svg>
+
+<div class="clouds gc" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><symbol id="cloud2" viewBox="0 0 200 80"><g fill="currentColor"><circle cx="55" cy="50" r="24"/><circle cx="92" cy="36" r="30"/><circle cx="132" cy="47" r="26"/><circle cx="163" cy="56" r="17"/><rect x="38" y="52" width="140" height="24" rx="12"/></g></symbol></svg>
+<svg class="cl" style="top:4%;width:320px;--d:110s;--dl:-25s;--o:.14"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:16%;width:200px;--d:75s;--dl:-55s;--o:.11"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:28%;width:360px;--d:130s;--dl:-95s;--o:.09"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:9%;width:150px;--d:62s;--dl:-8s;--o:.16"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:36%;width:240px;--d:100s;--dl:-70s;--o:.08"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:1%;width:230px;--d:88s;--dl:-60s;--o:.10"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:22%;width:170px;--d:68s;--dl:-35s;--o:.12"><use href="#cloud2"/></svg></div>
 <div class="app">
   <section>
-    <h1>Invoice & Money Receipt</h1>
+    <header class="ah"><a class="ab" href="https://www.ben-sol.net" target="_blank" rel="noopener" aria-label="Benchmark Solutions website"><img data-logo alt="Benchmark Solutions"></a><span class="av"></span><div class="at"><p class="ak">Energy &middot; Environment &middot; Safety &middot; Assurance</p><h1>Invoice &amp; Money Receipt</h1></div><button class="hb" id="homeLink">&larr; Home</button></header>
     <p class="sub">Fill in only the variable details. Everything else is preset.</p>
     <div class="panel">
       <div class="seg" data-t="invoice" id="seg"><i></i><button class="on" data-t="invoice">Invoice</button><button data-t="receipt">Money Receipt</button></div>
@@ -113,6 +258,7 @@ button:disabled{opacity:.55;cursor:wait}
       <div class="btns">
         <div class="msg" id="msg" role="status"></div>
         <button class="go" id="go">Download PDF</button>
+        <button class="pr" id="pr">Print</button>
       </div>
     </div>
   </section>
@@ -121,6 +267,7 @@ button:disabled{opacity:.55;cursor:wait}
     <div class="stage" id="stage"><div class="scaler" id="scaler"><div id="paperHost"></div></div></div>
   </section>
 </div>
+<div id="printHost"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
@@ -147,8 +294,8 @@ const ST={co:'Benchmark Solutions',addr1:'Ventura Iconia, Level 3, Holding 37 Ro
 const STAT=[['accName','Account Name'],['accNo','Account no'],['bank','Bank'],['branch','Branch'],['routing','Routing Number'],['swift','Swift code'],['tin','TIN'],['bin','BIN'],['signer','Signatory name'],['title','Signatory title']];
 const S={type:'invoice',gen:null,touched:{},f:{date:today(),name:'',address:'',office:'',code:'',invNo:'',desc:'',amount:'',mode:'excl',vat:ST.vat,purpose:'',account:'',method:'Cash',chq:''}};
 const FIELDS={
- invoice:[['name','Factory name','text','Benchmark Solutions'],['address','Factory address','ta','Ventura Iconia, Level 3, Holding 37 Road No. 11, Banani, Dhaka 1213'],['office','Office address (optional)','ta','Ventura Iconia, Level 3, Holding 37 Road No. 11, Banani, Dhaka 1213'],['date','Date','date'],['code','File code (auto)','text'],['invNo','Invoice number (auto)','text'],['desc','Item description (auto, can be multiple lines)','ta'],['amount','Amount (BDT)','text','10000'],['mode','The amount above is','sel',[['excl','Excluding VAT (VAT will be added)'],['incl','Including VAT (grand total)']]],['vat','VAT %','text']],
- receipt:[['name','Received from','text','Benchmark Solutions'],['address','Factory address (optional)','ta','Ventura Iconia, Level 3, Holding 37 Road No. 11, Banani, Dhaka 1213'],['office','Office address (optional)','ta','Ventura Iconia, Level 3, Holding 37 Road No. 11, Banani, Dhaka 1213'],['date','Date','date'],['code','File code (auto)','text'],['purpose','Purpose of payment (auto)','ta'],['amount','Amount (BDT)','text'],['account','Account','text'],['method','Payment method','sel',[['Cash','Cash'],['Cheque','Cheque']]],['chq','Cheque / reference no.','text']]
+ invoice:[['name','Factory name','text','ABC Company Ltd.'],['address','Factory address','ta','Plot 00, Road 00, Sample Industrial Area, City-0000'],['office','Office address (optional)','ta','Suite 00, Level 0, Example Tower, Sample Road, City-0000'],['date','Date','date'],['code','File code (auto)','text'],['invNo','Invoice number (auto)','text'],['desc','Item description (auto, can be multiple lines)','ta'],['amount','Amount (BDT)','text','10000'],['mode','The amount above is','sel',[['excl','Excluding VAT (VAT will be added)'],['incl','Including VAT (grand total)']]],['vat','VAT %','text']],
+ receipt:[['name','Received from','text','ABC Company Ltd.'],['address','Factory address (optional)','ta','Plot 00, Road 00, Sample Industrial Area, City-0000'],['office','Office address (optional)','ta','Suite 00, Level 0, Example Tower, Sample Road, City-0000'],['date','Date','date'],['code','File code (auto)','text'],['purpose','Purpose of payment (auto)','ta'],['amount','Amount (BDT)','text'],['account','Account','text'],['method','Payment method','sel',[['Cash','Cash'],['Cheque','Cheque']]],['chq','Cheque / reference no.','text']]
 };
 function money(){const f=S.f,a=parseFloat(String(f.amount).replace(/,/g,''))||0,v=parseFloat(f.vat)||0;let base,vat,total;
  if(f.mode==='incl'){total=a;base=Math.round(total/(1+v/100));vat=total-base}else{base=a;vat=Math.round(base*v/100);total=base+vat}return{a,base,vat,total}}
@@ -185,7 +332,7 @@ function paperHTML(){const f=S.f,m=money();
  <div class="sp"></div><div class="rsig"><hr><b>Authorized signature (Recipient)</b></div>
  <div class="thx">Thanks for your great support and look forward to continuing our productive Partnership.</div><div class="rule b"></div></div>`}
 function renderPaper(){$('paperHost').innerHTML=paperHTML();fit()}
-function fit(){const w=$('stage').clientWidth,s=w/794;$('scaler').style.zoom=s;$('stage').style.height=(1123*s)+'px'}
+function fit(){const w=$('stage').clientWidth,s=w/794;if(!w)return;$('scaler').style.zoom=s;$('stage').style.height=(1123*s)+'px'}
 new ResizeObserver(fit).observe($('stage'));
 function buildForm(){
  $('form').innerHTML=FIELDS[S.type].map(([k,l,t,o])=>{const v=esc(S.f[k]);
@@ -202,20 +349,63 @@ function onIn(k,v){S.f[k]=v;if(['code','invNo','desc','purpose'].includes(k))S.t
 function changed(){$('msg').textContent='';$('fn').textContent=fname();calc();renderPaper()}
 function setType(t){S.type=t;$('seg').dataset.t=t;document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));buildForm();changed();const st=$('stage');st.classList.remove('feed');void st.offsetWidth;st.classList.add('feed')}
 document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>setType(b.dataset.t));
+function browserSave(blob,name){
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();
+ setTimeout(()=>{a.remove();URL.revokeObjectURL(url)},4000)}
 $('go').onclick=async()=>{
  if(!window.html2canvas||!window.jspdf){$('msg').textContent='Libraries did not load. Reload the page.';return}
- const d=await claude.use('downloads').catch(()=>null);
- $('go').disabled=true;$('go').textContent='Preparing…';$('msg').textContent='';
+  $('go').disabled=true;$('go').textContent='Preparing…';$('msg').textContent='';
  try{const clone=$('paperHost').firstElementChild.cloneNode(true);Object.assign(clone.style,{position:'fixed',left:'-10000px',top:'0',transform:'none'});document.body.appendChild(clone);
   const cv=await html2canvas(clone,{scale:2.5,backgroundColor:'#ffffff'});clone.remove();
   const pdf=new jspdf.jsPDF({unit:'mm',format:'a4',orientation:'p'});
   pdf.addImage(cv.toDataURL('image/jpeg',.95),'JPEG',0,0,210,297);
   const blob=pdf.output('blob');
-  if(!d){$('msg').textContent='Downloads are not available in this view. Open the artifact link in a browser.'}
-  else{await d.save({filename:fname(),data:blob});$('msg').textContent='Saved: '+fname()}
- }catch(e){$('msg').textContent=e&&e.code==='declined'?'Download cancelled.':'Could not create or save the PDF. Try again.'}
+  const dl=(window.claude&&claude.use)?await claude.use('downloads').catch(()=>null):null;
+  if(dl){await dl.save({filename:fname(),data:blob})}else{browserSave(blob,fname())}
+  $('msg').textContent=PF?'Printing is blocked in this view, so the PDF was saved instead. Open it and press Ctrl+P to print.':'Saved: '+fname();PF=false
+ }catch(e){console.error(e);document.querySelectorAll('body>.paper').forEach(n=>n.remove());$('msg').textContent=e&&e.code==='declined'?'Download cancelled.':'Could not create or save the PDF. Try again.'}
  $('go').disabled=false;$('go').textContent='Download PDF'};
-buildForm();autos();changed();
+document.querySelectorAll('img[data-logo]').forEach(i=>i.src=LOGO);
+document.querySelectorAll('.hwrap>*').forEach((e,i)=>e.style.animationDelay=i*.12+'s');
+const FX=(()=>{const c=$('fx'),x=c.getContext('2d'),COL=['#3aa845','#2e7fe8','#d9322e'];let W,H,t=0,raf=0,P=[];
+ const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function size(){const r=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*r;c.height=H*r;x.setTransform(r,0,0,r,0,0);
+  P=Array.from({length:Math.round(W*H/20000)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}))}
+ function draw(){x.clearRect(0,0,W,H);
+  for(const p of P){p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H}
+  for(let i=0;i<P.length;i++){for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=dx*dx+dy*dy;
+    if(d<15000){x.strokeStyle='rgba(120,200,255,'+.18*(1-d/15000)+')';x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.stroke()}}
+   x.fillStyle='rgba(170,225,255,.55)';x.fillRect(P[i].x-1,P[i].y-1,2.2,2.2)}
+  const y0=H*.91,amp=Math.min(26,H*.04),kk=2*Math.PI/Math.max(280,W/3),ph=[['R','#ff9a9a',0],['Y','#ffe9a0',2*Math.PI/3],['B','#9ccfff',4*Math.PI/3]];
+  x.save();x.setLineDash([4,8]);x.strokeStyle='rgba(180,215,235,.14)';x.lineWidth=1;x.beginPath();x.moveTo(0,y0);x.lineTo(W,y0);x.stroke();x.restore();
+  const xd=Math.max(W-52,W*.86);
+  ph.forEach(([n,col,o])=>{const f=i=>y0-amp*Math.sin(kk*i-t*.04-o);
+   x.save();x.beginPath();x.strokeStyle=col;x.globalAlpha=.4;x.lineWidth=1.3;
+   for(let i=0;i<=W;i+=4){i?x.lineTo(i,f(i)):x.moveTo(i,f(i))}x.stroke();
+   x.fillStyle=col;x.globalAlpha=.55;x.beginPath();x.arc(xd,f(xd),3,0,7);x.fill();
+   x.font='600 11px Arial';x.fillText(n,xd+10,f(xd)+4);x.restore()});
+  x.globalAlpha=1;t++;if(!calm)raf=requestAnimationFrame(draw)}
+ const start=()=>{cancelAnimationFrame(raf);size();draw()},stop=()=>cancelAnimationFrame(raf);
+ addEventListener('resize',()=>{if(document.body.classList.contains('home'))start()});return{start,stop}})();
+function enter(t){document.body.classList.remove('home');FX.stop();setType(t);scrollTo(0,0);requestAnimationFrame(fit)}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>enter(b.dataset.go));
+$('homeLink').onclick=()=>{document.body.classList.add('home');FX.start();scrollTo(0,0)};
+let PF=false;
+function printDoc(){
+ const css=[...document.querySelectorAll('style')].map(e=>e.textContent).join('\n');
+ const html='<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+fname().replace('.pdf','')+'</title><style>'+css+'</style><style>html,body{background:#fff!important;margin:0}#printHost{display:block!important}#printHost .paper{width:210mm;height:296.5mm;box-shadow:none}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style></head><body><div id="printHost">'+paperHTML()+'</div></body></html>';
+ const old=document.getElementById('printFrame');if(old)old.remove();
+ const fr=document.createElement('iframe');fr.id='printFrame';fr.setAttribute('aria-hidden','true');fr.title='print';
+ fr.style.cssText='position:fixed;left:-10000px;top:0;width:794px;height:1123px;border:0';
+ fr.onload=()=>setTimeout(()=>{let ok=false;const w=fr.contentWindow;
+  try{w.addEventListener('beforeprint',()=>{ok=true});w.focus();w.print()}catch(e){}
+  setTimeout(()=>{if(ok){$('msg').textContent=''}else{PF=true;$('go').click()}},700)},400);
+ fr.srcdoc=html;document.body.appendChild(fr);setTimeout(()=>fr.remove(),180000)}
+$('pr').onclick=printDoc;
+addEventListener('beforeprint',()=>{$('printHost').innerHTML=paperHTML()});
+addEventListener('afterprint',()=>{$('printHost').innerHTML=''});
+buildForm();autos();changed();FX.start();
 </script>
 </body>
 </html>
