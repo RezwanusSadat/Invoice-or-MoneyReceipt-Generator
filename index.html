@@ -190,6 +190,16 @@ select option{background:#0a2a3d;color:#fff}
 .chip{color:#bfe6f5;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
 
 @media(max-width:560px){.hwrap{padding-bottom:max(120px,env(safe-area-inset-bottom))}}
+/* energy skyline sits above the clouds and is never cropped at the top */
+.sky{z-index:1;height:max(46vh,26.7vw)}
+.sunx{position:absolute;top:2px;left:calc(max(0px,(100vw - 1240px)/2) + 251px);width:64px;height:64px;overflow:visible;filter:drop-shadow(0 0 7px rgba(245,197,66,.5))}
+.sunx .rays{fill:none;stroke:#f5c542;stroke-width:2.6;stroke-linecap:round;transform-origin:32px 32px;animation:sunspin 18s linear infinite}
+.sunx circle{fill:#f5c542;transform-box:fill-box;transform-origin:center;animation:sunpulse 3.6s ease-in-out infinite}
+@keyframes sunpulse{50%{transform:scale(1.05)}}
+@keyframes sunspin{to{transform:rotate(1turn)}}
+@media(max-width:860px){.sunx{top:0;left:auto;right:12px;width:46px;height:46px}}
+@media(prefers-reduced-motion:reduce){.sunx .rays,.sunx circle{animation:none}}
+.sky .ln.pv{fill:rgba(50,130,225,.30)}.sky .gl{fill:none;stroke:#9bd6ff;stroke-width:1;stroke-opacity:.75}
 /* splash: logo link + drifting clouds */
 .clouds.gc{position:fixed;height:46vh}body.home .clouds.gc{display:none}
 .lk{display:block;border-radius:24px;transition:transform .3s}.lk:hover,.lk:focus-visible{transform:scale(1.05)}
@@ -235,17 +245,18 @@ select option{background:#0a2a3d;color:#fff}
 <g class="rot ln" style="transform-origin:560px 170px"><path d="M560 170V105M560 170L616 202M560 170L504 202"/></g>
 <g class="rot s ln" style="transform-origin:650px 200px"><path d="M650 200V155M650 200L689 222M650 200L611 222"/></g>
 <circle class="sun" cx="930" cy="80" r="22"/>
-<path class="ln fl" d="M800 295L845 265H905L860 295ZM895 295L940 265H1000L955 295Z"/>
+<path class="ln fl pv" d="M800 295L845 265H905L860 295ZM895 295L940 265H1000L955 295Z"/><path class="gl" d="M810.0 295.0L855.0 265.0M820.0 295.0L865.0 265.0M830.0 295.0L875.0 265.0M840.0 295.0L885.0 265.0M850.0 295.0L895.0 265.0M811.2 287.5L871.2 287.5M822.5 280.0L882.5 280.0M833.8 272.5L893.8 272.5M905.0 295.0L950.0 265.0M915.0 295.0L960.0 265.0M925.0 295.0L970.0 265.0M935.0 295.0L980.0 265.0M945.0 295.0L990.0 265.0M906.2 287.5L966.2 287.5M917.5 280.0L977.5 280.0M928.8 272.5L988.8 272.5"/>
 <g class="rot s r" style="transform-origin:1150px 245px"><circle cx="1150" cy="245" r="34" fill="none" stroke="#0b5d86" stroke-width="9" stroke-dasharray="8.9 8.9"/><circle class="ln" cx="1150" cy="245" r="27"/><circle class="ln" cx="1150" cy="245" r="8"/></g>
 </svg>
 
 <div class="clouds gc" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><symbol id="cloud2" viewBox="0 0 200 80"><g fill="currentColor"><circle cx="55" cy="50" r="24"/><circle cx="92" cy="36" r="30"/><circle cx="132" cy="47" r="26"/><circle cx="163" cy="56" r="17"/><rect x="38" y="52" width="140" height="24" rx="12"/></g></symbol></svg>
-<svg class="cl" style="top:4%;width:320px;--d:110s;--dl:-25s;--o:.14"><use href="#cloud2"/></svg>
+<svg class="sunx" viewBox="0 0 64 64"><path class="rays" d="M51.0 32.0L59.0 32.0M48.5 41.5L55.4 45.5M41.5 48.5L45.5 55.4M32.0 51.0L32.0 59.0M22.5 48.5L18.5 55.4M15.5 41.5L8.6 45.5M13.0 32.0L5.0 32.0M15.5 22.5L8.6 18.5M22.5 15.5L18.5 8.6M32.0 13.0L32.0 5.0M41.5 15.5L45.5 8.6M48.5 22.5L55.4 18.5"/><circle cx="32" cy="32" r="12"/></svg>
+<svg class="cl" style="top:4%;width:320px;--d:110s;--dl:-25s;--o:.30"><use href="#cloud2"/></svg>
 <svg class="cl" style="top:16%;width:200px;--d:75s;--dl:-55s;--o:.11"><use href="#cloud2"/></svg>
 <svg class="cl" style="top:28%;width:360px;--d:130s;--dl:-95s;--o:.09"><use href="#cloud2"/></svg>
-<svg class="cl" style="top:9%;width:150px;--d:62s;--dl:-8s;--o:.16"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:9%;width:150px;--d:62s;--dl:-8s;--o:.34"><use href="#cloud2"/></svg>
 <svg class="cl" style="top:36%;width:240px;--d:100s;--dl:-70s;--o:.08"><use href="#cloud2"/></svg>
-<svg class="cl" style="top:1%;width:230px;--d:88s;--dl:-60s;--o:.10"><use href="#cloud2"/></svg>
+<svg class="cl" style="top:1%;width:230px;--d:88s;--dl:-60s;--o:.26"><use href="#cloud2"/></svg>
 <svg class="cl" style="top:22%;width:170px;--d:68s;--dl:-35s;--o:.12"><use href="#cloud2"/></svg></div>
 <div class="app">
   <section>
